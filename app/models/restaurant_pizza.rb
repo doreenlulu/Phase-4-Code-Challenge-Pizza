@@ -3,10 +3,10 @@ class RestaurantPizza < ApplicationRecord
     belongs_to :pizza
 
     validates :price, presence: true
-    validates :price_scope
+    validate :price_scope
 
     def price_scope
-        unless (price >1 && price < 30)
+        if (price < 1 || price > 30)
             errors.add(:price, "must have a price between 1 and 30")
         end
     end
